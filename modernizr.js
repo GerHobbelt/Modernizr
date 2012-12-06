@@ -519,7 +519,7 @@ window.Modernizr = (function( window, document, undefined ) {
      * @param feature - String naming the feature
      * @param test - Function returning true if feature is supported, false if not
      */
-     Modernizr.addTest = function ( feature, test ) {
+    Modernizr.addTest = function ( feature, test ) {
        if ( typeof feature == 'object' ) {
          for ( var key in feature ) {
            if ( hasOwnProp( feature, key ) ) {
@@ -527,7 +527,6 @@ window.Modernizr = (function( window, document, undefined ) {
            }
          }
        } else {
-
          feature = feature.toLowerCase();
 
          if ( Modernizr[feature] !== undefined ) {
@@ -545,11 +544,10 @@ window.Modernizr = (function( window, document, undefined ) {
            docElement.className += ' ' + (test ? '' : 'no-') + feature;
          }
          Modernizr[feature] = test;
-
        }
 
        return Modernizr; // allow chaining.
-     };
+    };
 
 
     // Reset modElem.cssText to nothing to reduce memory footprint.
