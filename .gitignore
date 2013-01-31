@@ -3,3 +3,6 @@ build
 dist
 tmp
 .DS_Store
+*.bak
+*~
+node_modules
