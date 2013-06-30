@@ -1,6 +1,16 @@
+/*!
+{
+  "name": "CSS rgba",
+  "caniuse": "css3-colors",
+  "property": "rgba",
+  "tags": ["css"],
+  "notes": [{
+    "name": "CSSTricks Tutorial",
+    "href": "http://css-tricks.com/rgba-browser-support/"
+  }]
+}
+!*/
 define(['Modernizr', 'createElement'], function( Modernizr, createElement ) {
-  // css-tricks.com/rgba-browser-support/
-
   Modernizr.addTest('rgba', function() {
     var elem = createElement('div');
     var style = elem.style;

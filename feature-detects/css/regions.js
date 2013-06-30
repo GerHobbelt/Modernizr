@@ -1,8 +1,17 @@
+/*!
+{
+  "name": "CSS Regions",
+  "caniuse": "css-regions",
+  "authors": ["Mihai Balan"],
+  "property": "regions",
+  "tags": ["css"],
+  "notes": [{
+    "name": "W3C Specification",
+    "href": "http://www.w3.org/TR/css3-regions/"
+  }]
+}
+!*/
 define(['Modernizr', 'createElement', 'docElement'], function( Modernizr, createElement, docElement ) {
-  // CSS Regions
-  // http://www.w3.org/TR/css3-regions/
-  // By: Mihai Balan
-
   // We start with a CSS parser test then we check page geometry to see if it's affected by regions
   // Later we might be able to retire the second part, as WebKit builds with the false positives die out
 
@@ -48,7 +57,7 @@ define(['Modernizr', 'createElement', 'docElement'], function( Modernizr, create
     content.style[flowIntoProperty] = flowName;
     flowedRect = content.getBoundingClientRect();
 
-    delta = flowedRect.left - plainRect.left;
+    delta = parseInt(flowedRect.left - plainRect.left, 10);
     docElement.removeChild(container);
     content = region = container = undefined;
 

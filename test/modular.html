@@ -60,6 +60,8 @@
     "test/css/overflow-scrolling",
     "test/css/pointerevents",
     "test/css/positionsticky",
+    "test/css/pseudoanimations",
+    "test/css/pseudotransitions",
     "test/css/reflections",
     "test/css/regions",
     "test/css/remunit",
@@ -77,6 +79,7 @@
     "test/css/vmaxunit",
     "test/css/vminunit",
     "test/css/vwunit",
+    "test/css/wrapflow",
     "test/dom/classlist",
     "test/dom/createElement-attrs",
     "test/dom/dataset",
@@ -123,6 +126,7 @@
     "test/window/framed",
     "test/workers/blobworkers",
     "test/workers/dataworkers",
+    "test/workers/sharedworkers",
     "test/workers/webworkers",
     "test/webrtc/getusermedia",
     "test/webrtc/peerconnection",
@@ -168,6 +172,7 @@
     "test/userdata",
     "test/vibration",
     "test/video",
+    "test/video/autoplay",
     "test/web-intents",
     "test/webgl",
     "test/websockets"
@@ -191,7 +196,7 @@
 
 <script src="r.js"></script>
 
-<script src="node_modules/underscore/underscore-min.js"></script>
+<script src="/node_modules/underscore/underscore-min.js"></script>
 <script>
   var buildButton = document.getElementById('build');
   var configArea = document.getElementById('config-json');
@@ -234,11 +239,11 @@
       return;
     }
 
-    require(['src/generate'], function( generate ) {
+    require(['../src/generate'], function( generate ) {
       var modInit = generate(config);
 
       requirejs.optimize({
-        "baseUrl" : "src/",
+        "baseUrl" : "../src/",
         "optimize"    : "none",
         "optimizeCss" : "none",
         "paths" : {

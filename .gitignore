@@ -1,9 +1,11 @@
+node_modules
 modernizr.min.js
+metadata.json
 build
 dist
 tmp
 .DS_Store
+.project
 *.bak
 *~
-node_modules
 npm-debug.log

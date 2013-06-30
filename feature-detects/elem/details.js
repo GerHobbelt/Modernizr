@@ -1,23 +1,35 @@
-define(['Modernizr', 'createElement', 'docElement'], function( Modernizr, createElement, docElement ) {
-  // By @mathias, based on http://mths.be/axh
+/*!
+{
+  "name": "details Element",
+  "caniuse": "details",
+  "property": "details",
+  "tags": ["elem"],
+  "authors": ["@mathias"],
+  "notes": [{
+    "name": "Mathias' Original",
+    "href": "http://mths.be/axh"
+  }]
+}
+!*/
+define(['Modernizr', 'createElement', 'docElement', 'testStyles'], function( Modernizr, createElement, docElement, testStyles ) {
   Modernizr.addTest('details', function() {
     var el = createElement('details');
-    var fake;
-    if (!('open' in el)) { // return early if possible; thanks @aFarkas!
+    var diff;
+
+    // return early if possible; thanks @aFarkas!
+    if (!('open' in el)) {
       return false;
     }
-    var root = document.body || (function() {
-      fake = true;
-      return docElement.insertBefore(createElement('body'), docElement.firstElementChild || docElement.firstChild);
-    }());
-    el.innerHTML = '<summary>a</summary>b';
-    el.style.display = 'block';
-    root.appendChild(el);
-    var diff = el.offsetHeight;
-    el.open = true;
-    diff = diff != el.offsetHeight;
-    root.removeChild(el);
-    fake && root.parentNode.removeChild(root);
+
+    testStyles('#modernizr details{display:block}', function( node ) {
+      node.appendChild(el);
+      el.innerHTML = '<summary>a</summary>b';
+      diff = el.offsetHeight;
+      el.open = true;
+      diff = diff != el.offsetHeight;
+    });
+
+
     return diff;
   });
 });

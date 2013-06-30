@@ -9,6 +9,29 @@ Modernizr tests which native CSS3 and HTML5 features are available in the curren
 
 Modernizr has an optional (*not included*) conditional resource loader called `Modernizr.load()`, based on [Yepnope.js](http://yepnopejs.com). You can get a build that includes `Modernizr.load()`, as well as choosing which feature tests to include on the [Download page](http://www.modernizr.com/download/).
 
+## New Asynchronous Event Listeners
+
+Often times people want to know when an asynchronous test is done so they can allow their application to react to it.
+In the past, you've had to rely on watching properties or `<html>` classes. Only events on **asynchronous** tests are
+supported. Synchronous tests should be handled synchronously for speed and consistency reasons.
+
+The new api looks like this:
+
+```javascript
+// Listen to a test, give it a callback
+Modernizr.on('testname', function( result ) {
+  if (result) {
+    console.log('The test passed!');
+  }
+  else {
+    console.log('The test failed!');
+  }
+});
+```
+
+We guarantee that we'll only invoke your function once (per time that you call `on`). We are currently not exposing
+a method for exposing the `trigger` functionality. Instead, if you'd like to have control over async tests, use the
+`src/addTest` feature, and any test that you set will automatically expose and trigger the `on` functionality.
 
 ## Test suite
 
@@ -40,7 +63,7 @@ visit <url>/tests
 
 ### To see simple build in browser:
 
-serve the root dir, `<url>/modular.html`
+serve the root dir, `<url>/test/modular.html`
 
 
 ### To see the build tool:
@@ -53,6 +76,31 @@ serve the root dir, `<url>/modular.html`
 * visit <url>/download
 * It should be just a big list of things you can build with no frills.
 
+
+### API Reference
+
+Modernizr can be used programmatically via npm:
+
+```javascript
+var modernizr = require("modernizr");
+```
+
+#### Building
+
+A `build` method is exposed for generating custom Modernizr builds. Example:
+
+```javascript
+var modernizr = require("modernizr");
+
+var result = modernizr.build({}, function (result) {
+  console.log(result.code); // full source
+  console.log(result.min); // minfied output
+});
+```
+
+The first parameter takes a JSON object of options and feature-detects to include. See [`lib/config-all.json`](lib/config-all.json) for all available options.
+
+The second parameter is a function invoked on task completion.
 
 ## License
 

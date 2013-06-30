@@ -1,19 +1,26 @@
-define(['Modernizr', 'createElement', 'docElement'], function( Modernizr, createElement, docElement ) {
-  // This implementation only tests support for interactive form validation.
-  // To check validation for a specific type or a specific other constraint,
-  // the test can be combined:
-  //    - Modernizr.inputtypes.numer && Modernizr.formvalidation (browser supports rangeOverflow, typeMismatch etc. for type=number)
-  //    - Modernizr.input.required && Modernizr.formvalidation (browser supports valueMissing)
-  //
+/*!
+{
+  "name": "Form Validation",
+  "property": "formvalidation",
+  "tags": ["forms", "validation", "attribute"]
+}
+!*/
+/* DOC
 
+This implementation only tests support for interactive form validation.
+To check validation for a specific type or a specific other constraint,
+the test can be combined:
+
+- `Modernizr.inputtypes.number && Modernizr.formvalidation` (browser supports rangeOverflow, typeMismatch etc. for type=number)
+- `Modernizr.input.required && Modernizr.formvalidation` (browser supports valueMissing)
+
+*/
+define(['Modernizr', 'createElement', 'docElement', 'testStyles'], function( Modernizr, createElement, docElement, testStyles ) {
     Modernizr.addTest('formvalidation', function() {
       var form = createElement('form');
       if ( !('checkValidity' in form) || !('addEventListener' in form) ) {
         return false;
       }
-      var body = document.body;
-      var html = docElement;
-      var bodyFaked = false;
       var invaildFired = false;
       var input;
 
@@ -33,40 +40,24 @@ define(['Modernizr', 'createElement', 'docElement'], function( Modernizr, create
       //older opera browsers need a name attribute
       form.innerHTML = '<input name="modTest" required><button></button>';
 
-      // FF4 doesn't trigger "invalid" event if form is not in the DOM tree
-      // Chrome throws error if invalid input is not visible when submitting
-      form.style.position = 'absolute';
-      form.style.top = '-99999em';
+      testStyles('#modernizr form{position:absolute;top:-99999em}', function( node ) {
+        node.appendChild(form);
 
-      // We might in <head> in which case we need to create body manually
-      if ( !body ) {
-        bodyFaked = true;
-        body = createElement('body');
-        //avoid crashing IE8, if background image is used
-        body.style.background = "";
-        html.appendChild(body);
-      }
+        input = form.getElementsByTagName('input')[0];
 
-      body.appendChild(form);
+        // Record whether "invalid" event is fired
+        input.addEventListener('invalid', function(e) {
+          invaildFired = true;
+          e.preventDefault();
+          e.stopPropagation();
+        }, false);
 
-      input = form.getElementsByTagName('input')[0];
+        //Opera does not fully support the validationMessage property
+        Modernizr.formvalidationmessage = !!input.validationMessage;
 
-      // Record whether "invalid" event is fired
-      input.addEventListener('invalid', function(e) {
-        invaildFired = true;
-        e.preventDefault();
-        e.stopPropagation();
-      }, false);
-
-      //Opera does not fully support the validationMessage property
-      Modernizr.formvalidationmessage = !!input.validationMessage;
-
-      // Submit form by clicking submit button
-      form.getElementsByTagName('button')[0].click();
-
-      // Don't forget to clean up
-      body.removeChild(form);
-      bodyFaked && html.removeChild(body);
+        // Submit form by clicking submit button
+        form.getElementsByTagName('button')[0].click();
+      });
 
       return invaildFired;
     });

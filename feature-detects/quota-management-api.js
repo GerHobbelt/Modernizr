@@ -1,13 +1,24 @@
+/*!
+{
+  "name": "Quota Storage Management API",
+  "property": "quotamanagement",
+  "tags": ["storage"],
+  "notes": [{
+    "name": "W3C Spec",
+    "href": "http://www.w3.org/TR/quota-api/"
+  }]
+}
+!*/
+/* DOC
+
+
+
+*/
 define(['Modernizr', 'prefixed'], function( Modernizr, prefixed ) {
-  // Quota Storage Management API
-  // This API can be used to check how much quota an origin is using and request more
-
-  // Currently only implemented in Chrome.
-  // https://developers.google.com/chrome/whitepapers/storage
-  // By Addy Osmani
-
   Modernizr.addTest('quotamanagement', function() {
-    var storage = prefixed('StorageInfo', window);
-    return !!(storage && 'TEMPORARY' in storage && 'PERSISTENT' in storage);
+    var tempStorage = prefixed('temporaryStorage', navigator);
+    var persStorage = prefixed('persistentStorage', navigator);
+
+    return !!(tempStorage && persStorage);
   });
 });
