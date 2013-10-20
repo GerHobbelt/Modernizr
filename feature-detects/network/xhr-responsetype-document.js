@@ -12,19 +12,8 @@
 /* DOC
 
 Tests for XMLHttpRequest xhr.responseType='document'.
+
 */
-define(['Modernizr'], function( Modernizr ) {
-  Modernizr.addTest('xhrresponsetypedocument', (function(type) {
-    if (typeof XMLHttpRequest == 'undefined') {
-      return false;
-    }
-    var xhr = new XMLHttpRequest();
-    xhr.open('get', '/', true);
-    try {
-      xhr.responseType = type;
-    } catch(error) {
-      return false;
-    }
-    return 'response' in xhr && xhr.responseType == type;
-  }('document')));
+define(['Modernizr', 'testXhrType'], function( Modernizr, testXhrType ) {
+  Modernizr.addTest('xhrresponsetypedocument', testXhrType('document'));
 });

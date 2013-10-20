@@ -15,19 +15,8 @@
 /* DOC
 
 Tests for XMLHttpRequest xhr.responseType='json'.
+
 */
-define(['Modernizr'], function( Modernizr ) {
-  Modernizr.addTest('xhrresponsetypejson', (function(type) {
-    if (typeof XMLHttpRequest == 'undefined') {
-      return false;
-    }
-    var xhr = new XMLHttpRequest();
-    xhr.open('get', '/', true);
-    try {
-      xhr.responseType = type;
-    } catch(error) {
-      return false;
-    }
-    return 'response' in xhr && xhr.responseType == type;
-  }('json')));
+define(['Modernizr', 'testXhrType'], function( Modernizr, testXhrType ) {
+  Modernizr.addTest('xhrresponsetypejson', testXhrType('json'));
 });

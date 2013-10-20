@@ -12,19 +12,8 @@
 /* DOC
 
 Tests for XMLHttpRequest xhr.responseType='blob'.
+
 */
-define(['Modernizr'], function( Modernizr ) {
-  Modernizr.addTest('xhrresponsetypeblob', (function(type) {
-    if (typeof XMLHttpRequest == 'undefined') {
-      return false;
-    }
-    var xhr = new XMLHttpRequest();
-    xhr.open('get', '/', true);
-    try {
-      xhr.responseType = type;
-    } catch(error) {
-      return false;
-    }
-    return 'response' in xhr && xhr.responseType == type;
-  }('blob')));
+define(['Modernizr', 'testXhrType'], function( Modernizr, testXhrType ) {
+  Modernizr.addTest('xhrresponsetypeblob', testXhrType('blob'));
 });

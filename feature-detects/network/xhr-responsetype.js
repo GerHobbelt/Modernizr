@@ -12,6 +12,7 @@
 /* DOC
 
 Tests for XMLHttpRequest xhr.responseType.
+
 */
 define(['Modernizr'], function( Modernizr ) {
   Modernizr.addTest('xhrresponsetype', (function() {
