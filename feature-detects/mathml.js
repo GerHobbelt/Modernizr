@@ -3,6 +3,7 @@
   "name": "MathML",
   "property": "mathml",
   "caniuse": "mathml",
+  "async": false,
   "authors": ["Addy Osmani", "Davide P. Cervone", "David Carlisle"],
   "notes": [{
     "name": "W3C spec",
