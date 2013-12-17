@@ -29,7 +29,7 @@ define(['contains', 'mStyle', 'createElement', 'nativeTestProps', 'is'], functio
     }
 
     // Otherwise do it properly
-    var afterInit, i, j, prop, before;
+    var afterInit, i, prop, before;
 
     // If we don't have a style element, that means
     // we're running async or after the core tests,
@@ -53,7 +53,7 @@ define(['contains', 'mStyle', 'createElement', 'nativeTestProps', 'is'], functio
       prop = props[i];
       before = mStyle.style[prop];
 
-      if ( !contains(prop, "-") && mStyle.style[prop] !== undefined ) {
+      if ( !contains(prop, '-') && mStyle.style[prop] !== undefined ) {
 
         // If value to test has been passed in, do a set-and-check test.
         // 0 (integer) is a valid property value, so check that `value` isn't

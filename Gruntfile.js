@@ -6,6 +6,7 @@ module.exports = function( grunt ) {
   var fs = require('fs');
   var path = require('path');
   var modConfig = grunt.file.readJSON('lib/config-all.json');
+  var browsers = grunt.file.readJSON('lib/sauce-browsers.json');
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -89,10 +90,12 @@ module.exports = function( grunt ) {
         laxcomma: true,
         newcap: false,
         noarg: true,
+        quotmark: 'single',
         smarttabs: true,
         sub: true,
         trailing: true,
         undef: true,
+        unused: true,
         globals: {
           Modernizr: true,
           DocumentTouch: true,
@@ -101,7 +104,8 @@ module.exports = function( grunt ) {
           Blob: true,
           define: true,
           require: true
-        }
+        },
+        ignores: ['src/load.js', 'src/require.js']
       },
       files: [
         'Gruntfile.js',
@@ -147,21 +151,21 @@ module.exports = function( grunt ) {
           dir: 'build',
           appDir: '.',
           baseUrl: 'src',
-          optimize: "none",
-          optimizeCss: "none",
+          optimize: 'none',
+          optimizeCss: 'none',
           paths: {
-            "test" : "../feature-detects",
-            "modernizr-init" : "../tmp/modernizr-init"
+            'test' : '../feature-detects',
+            'modernizr-init' : '../tmp/modernizr-init'
           },
           modules : [{
-            "name" : "modernizr-build",
-            "include" : ["modernizr-init"],
-            "create" : true
+            'name' : 'modernizr-build',
+            'include' : ['modernizr-init'],
+            'create' : true
           }],
           fileExclusionRegExp: /^(.git|node_modules|modulizr|media|test)$/,
           wrap: {
-            start: '<%= banner.full %>' + "\n;(function(window, document, undefined){",
-            end: "})(this, document);"
+            start: '<%= banner.full %>' + '\n;(function(window, document, undefined){',
+            end: '})(this, document);'
           },
           onBuildWrite: function (id, path, contents) {
             if ((/define\(.*?\{/).test(contents)) {
@@ -184,11 +188,32 @@ module.exports = function( grunt ) {
           }
         }
       }
+    },
+    connect: {
+      server: {
+        options: {
+          base: '',
+          port: 9999
+        }
+      }
+    },
+    'saucelabs-qunit': {
+      all: {
+        options: {
+          urls: ['http://127.0.0.1:9999/test/basic.html'],
+          tunnelTimeout: 5,
+          build: process.env.TRAVIS_JOB_ID,
+          concurrency: 2,
+          browsers: browsers,
+          testname: 'qunit tests',
+          tags: ['master', '<%= pkg.version %>']
+        }
+      }
     }
   });
 
   // Load required contrib packages
-  require('matchdep').filter('grunt-*').forEach(grunt.loadNpmTasks);
+  require('matchdep').filter(['grunt-*', '!grunt-cli']).forEach(grunt.loadNpmTasks);
 
   // devDependencies may or may not be installed
   require('matchdep').filterDev('grunt-*').forEach(function (contrib) {
@@ -200,20 +225,20 @@ module.exports = function( grunt ) {
   });
 
   // Strip define fn
-  grunt.registerMultiTask('stripdefine', "Strip define call from dist file", function() {
+  grunt.registerMultiTask('stripdefine', 'Strip define call from dist file', function() {
     this.filesSrc.forEach(function(filepath) {
-      // Remove `define("modernizr-init" ...)` and `define("modernizr-build" ...)`
+      // Remove `define('modernizr-init' ...)` and `define('modernizr-build' ...)`
       var mod = grunt.file.read(filepath).replace(/define\("modernizr-(init|build)", function\(\)\{\}\);/g, '');
 
       // Hack the prefix into place. Anything is way too big for something so small.
       if ( modConfig && modConfig.classPrefix ) {
-        mod = mod.replace("classPrefix : '',", "classPrefix : '" + modConfig.classPrefix.replace(/"/g, '\\"') + "',");
+        mod = mod.replace('classPrefix : \'\',', 'classPrefix : \'' + modConfig.classPrefix.replace(/"/g, '\\"') + '\',');
       }
       grunt.file.write(filepath, mod);
     });
   });
 
-  grunt.registerMultiTask('generateinit', "Generate Init file", function() {
+  grunt.registerMultiTask('generateinit', 'Generate Init file', function() {
     var requirejs = require('requirejs');
     requirejs.config({
       appDir : __dirname + '/src/',
@@ -225,10 +250,13 @@ module.exports = function( grunt ) {
   // Testing tasks
   grunt.registerTask('test', ['build', 'jshint', 'qunit', 'nodeunit']);
 
+  // Sauce labs CI task
+  grunt.registerTask('sauce', ['connect', 'saucelabs-qunit']);
+
   // Travis CI task.
-  grunt.registerTask('travis', 'test');
+  grunt.registerTask('travis', ['test']);
 
   // Build
-  grunt.registerTask('build', ['clean', 'generateinit', 'requirejs', 'copy', 'clean:postbuild', 'stripdefine', 'uglify', 'jshint']);
-  grunt.registerTask('default', ['build', 'qunit']);
+  grunt.registerTask('build', ['clean', 'generateinit', 'requirejs', 'copy', 'clean:postbuild', 'stripdefine', 'uglify']);
+  grunt.registerTask('default', ['build', 'jshint']);
 };

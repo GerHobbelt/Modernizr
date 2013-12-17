@@ -9,3 +9,4 @@ tmp
 *.bak
 *~
 npm-debug.log
+*.log

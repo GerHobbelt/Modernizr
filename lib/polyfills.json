@@ -669,5 +669,29 @@
     "authors": ["Jonathan 'J5' Cook"],
     "href": "https://code.google.com/p/html5-shims/",
     "licenses": ["Apache2"]
+  },
+  "polycrypt": {
+    "name": "PolyCrypt",
+    "authors": ["BBN Technologies"],
+    "href": "http://polycrypt.net/",
+    "licenses": ["BSD"]
+  },
+  "webanimationsjs": {
+    "name": "web-animations-js",
+    "authors": ["web-animations"],
+    "href": "https://github.com/web-animations/web-animations-js",
+    "licenses": ["Apache2"]
+  },
+  "shumway": {
+    "name": "JavaScript Flash VM",
+    "authors": ["Mozilla Foundation"],
+    "href": "https://github.com/mozilla/shumway",
+    "licenses": ["Apache2"]
+  },
+  "maxlength": {
+    "name": "maxlength plugin",
+    "authors": ["Remy Sharp"],
+    "href": "http://remysharp.com/2008/06/30/maxlength-plugin/",
+    "licenses": ["CC SA"]
   }
 }
