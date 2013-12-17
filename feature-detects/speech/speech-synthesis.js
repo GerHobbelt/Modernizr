@@ -1,6 +1,5 @@
 /*!
 {
-  "async": false,
   "authors": ["Cătălin Mariș"],
   "name": "Speech Synthesis API",
   "notes": [
@@ -14,6 +13,6 @@
 }
 !*/
 
-define(['Modernizr', 'prefixed'], function (Modernizr, prefixed) {
+define(['Modernizr'], function ( Modernizr ) {
   Modernizr.addTest('speechsynthesis', 'SpeechSynthesisUtterance' in window);
 });

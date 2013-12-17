@@ -4,6 +4,7 @@
   "caniuse": "css-hyphens",
   "property": ["csshyphens", "softhyphens", "softhyphensfind"],
   "tags": ["css"],
+  "async" : true,
   "authors": ["David Newton"],
   "async", true,
   "warnings": [
