@@ -10,9 +10,7 @@
 }
 !*/
 /* DOC
-
 Detects support for the `contenteditable` attribute of elements, allowing their DOM text contents to be edited directly by the user.
-
 */
 define(['Modernizr', 'createElement', 'docElement'], function( Modernizr, createElement, docElement ) {
   Modernizr.addTest('contenteditable', function() {
@@ -21,7 +19,7 @@ define(['Modernizr', 'createElement', 'docElement'], function( Modernizr, create
 
     // some mobile browsers (android < 3.0, iOS < 5) claim to support
     // contentEditable, but but don't really. This test checks to see
-    // confirms wether or not it actually supports it.
+    // confirms whether or not it actually supports it.
 
     var div = createElement('div');
     div.contentEditable = true;

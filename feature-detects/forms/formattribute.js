@@ -2,14 +2,13 @@
 {
   "name": "input[form] Attribute",
   "property": "formattribute",
-  "tags": ["attribute", "forms", "input"]
+  "tags": ["attribute", "forms", "input"],
+  "builderAliases": ["forms_formattribute"]
 }
 !*/
 /* DOC
-
 Detects whether input form="form_id" is available on the platform
 E.g. IE 10 (and below), don't support this
-
 */
 define(['Modernizr', 'createElement', 'docElement'], function( Modernizr, createElement, docElement ) {
 

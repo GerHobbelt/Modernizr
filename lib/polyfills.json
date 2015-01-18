@@ -1,4 +1,11 @@
 {
+  "html5shiv": {
+    "name": "HTML5 Shiv",
+    "authors": ["Alexander Farkas (@aFarkas)", "Jonathan Neal (@jonathantneal)", "Paul Irish (@paulirish)"],
+    "href": "https://github.com/aFarkas/html5shiv",
+    "licences": ["MIT", "GPL2"],
+    "notes": ["The HTML5 Shiv enables use of HTML5 sectioning elements in legacy Internet Explorer and provides basic HTML5 styling for Internet Explorer 6-9, Safari 4.x (and iPhone 3.x), and Firefox 3.x."]
+  },
   "html5-notifications": {
     "name": "HTML5 Notifications",
     "authors": ["Hendrik Beskow"],
@@ -11,7 +18,7 @@
     "authors": ["Tsvetan Tsvetkov"],
     "href": "https://github.com/ttsvetko/HTML5-Desktop-Notifications",
     "licences": ["Apache2"],
-    "notes": ["A small library that unifies the HTML5 Notifications APIs accross different browsers including IE9 & IE10."]
+    "notes": ["A small library that unifies the HTML5 Notifications APIs across different browsers including IE9 & IE10."]
   },
   "css3pie": {
     "name": "CSS3 PIE",
@@ -55,6 +62,13 @@
     "name": "CSS Sandpaper",
     "authors": ["Zoltan Hawryluk"],
     "href": "http://www.useragentman.com/blog/2010/03/09/cross-browser-css-transforms-even-in-ie/",
+    "licenses": ["MIT"],
+    "notes": []
+  },
+  "css-escape": {
+    "name": "CSS.escape()",
+    "authors": ["Mathias Bynens"],
+    "href": "http://mths.be/cssescape",
     "licenses": ["MIT"],
     "notes": []
   },
@@ -111,6 +125,10 @@
     "name": "ES5 Sham",
     "href": "https://github.com/kriskowal/es5-shim",
     "notes": ["Adds the rest of Object, read carefully before using"]
+  },
+  "es6shim": {
+    "name": "ES6 Shim",
+    "href": "https://github.com/paulmillr/es6-shim"
   },
   "html5gears": {
     "name": "html5-gears",
@@ -195,8 +213,8 @@
   },
   "jdataview": {
     "name": "jDataView",
-    "authors": ["Christopher Chedeau"],
-    "href": "https://github.com/vjeux/jDataView/"
+    "authors": ["Christopher Chedeau", "Ingvar Stepanyan"],
+    "href": "https://github.com/jDataView/jDataView/"
   },
   "screenfulljs": {
     "name": "screenfull.js",
@@ -693,5 +711,41 @@
     "authors": ["Remy Sharp"],
     "href": "http://remysharp.com/2008/06/30/maxlength-plugin/",
     "licenses": ["CC SA"]
+  },
+  "eventlistener": {
+    "name": "EventListener",
+    "authors": ["Jonathan Neal"],
+    "href": "https://github.com/jonathantneal/EventListener",
+    "licenses": ["MIT"]
+  },
+  "es6promises": {
+    "name": "ES6-Promises",
+    "authors": ["Jake Archibald"],
+    "href": "https://github.com/jakearchibald/ES6-Promises",
+    "licenses": ["MIT"]
+  },
+  "urlparser": {
+    "authors": ["Google Inc."],
+    "href": "https://github.com/Polymer/URL",
+    "licenses": ["BSD"],
+    "name": "Polymer URL parser polyfill"
+  },
+  "css-selector-engine": {
+    "name": "CSS Selector Engine",
+    "authors": ["Егор Халимоненко"],
+    "href": "https://github.com/termi/CSS_selector_engine",
+    "licenses": ["MIT"]
+  },
+  "mutationobservers": {
+    "authors": ["Google Inc."],
+    "href": "https://github.com/Polymer/MutationObservers",
+    "licenses": ["BSD"],
+    "name": "Mutation Observers polyfill"
+  },
+  "polymer-htmlimports": {
+    "authors": ["Google Inc."],
+    "href": "https://github.com/polymer/HTMLImports",
+    "licenses": ["BSD"],
+    "name": "Polymer HTMLImports polyfill"
   }
 }

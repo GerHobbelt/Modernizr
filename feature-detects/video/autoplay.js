@@ -4,13 +4,12 @@
   "property": "videoautoplay",
   "tags": ["video"],
   "async" : true,
-  "warnings": ["This test is very large – only include it if you absolutely need it"]
+  "warnings": ["This test is very large – only include it if you absolutely need it"],
+  "knownBugs": ["crashes with an alert on iOS7 when added to homescreen"]
 }
 !*/
 /* DOC
-
 Checks for support of the autoplay attribute of the video element.
-
 */
 define(['Modernizr', 'addTest', 'docElement', 'createElement', 'test/video'], function( Modernizr, addTest, docElement, createElement ) {
 
@@ -19,10 +18,10 @@ define(['Modernizr', 'addTest', 'docElement', 'createElement', 'test/video'], fu
     var waitTime = 300;
     var elem = createElement('video');
     var elemStyle = elem.style;
-    var testAutoplay = function(called) {
+    var testAutoplay = function(arg) {
       clearTimeout(timeout);
       elem.removeEventListener('playing', testAutoplay);
-      addTest('videoautoplay', called || elem.currentTime !== 0);
+      addTest('videoautoplay', arg && arg.type === 'playing' || elem.currentTime !== 0);
       elem.parentNode.removeChild(elem);
     };
 
@@ -33,6 +32,7 @@ define(['Modernizr', 'addTest', 'docElement', 'createElement', 'test/video'], fu
       return;
     }
 
+    elemStyle.position = 'absolute';
     elemStyle.height = 0;
     elemStyle.width = 0;
 
@@ -60,7 +60,7 @@ define(['Modernizr', 'addTest', 'docElement', 'createElement', 'test/video'], fu
     // wait for the next tick to add the listener, otherwise the element may
     // not have time to play in high load situations (e.g. the test suite)
     setTimeout(function() {
-      elem.addEventListener('playing', function(){testAutoplay(true);});
+      elem.addEventListener('playing', testAutoplay);
       timeout = setTimeout(testAutoplay, waitTime);
     }, 0);
   });

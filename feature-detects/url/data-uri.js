@@ -4,6 +4,7 @@
   "property": "datauri",
   "caniuse": "datauri",
   "tags": ["url"],
+  "builderAliases": ["url_data_uri"],
   "async": true,
   "notes": [{
     "name": "Wikipedia article",
@@ -13,14 +14,12 @@
 }
 !*/
 /* DOC
-
 Detects support for data URIs. Provides a subproperty to report support for data URIs over 32kb in size:
 
 ```javascript
 Modernizr.datauri           // true
 Modernizr.datauri.over32kb  // false in IE8
 ```
-
 */
 define(['Modernizr', 'addTest'], function( Modernizr, addTest ) {
   // https://github.com/Modernizr/Modernizr/issues/14
@@ -60,14 +59,14 @@ define(['Modernizr', 'addTest'], function( Modernizr, addTest ) {
       var datauriBig = new Image();
 
       datauriBig.onerror = function() {
-          addTest('datauri', true);
-          Modernizr.datauri = new Boolean(true);
-          Modernizr.datauri.over32kb = false;
+        addTest('datauri', true);
+        Modernizr.datauri = new Boolean(true);
+        Modernizr.datauri.over32kb = false;
       };
       datauriBig.onload = function() {
-          addTest('datauri', true);
-          Modernizr.datauri = new Boolean(true);
-          Modernizr.datauri.over32kb = (datauriBig.width == 1 && datauriBig.height == 1);
+        addTest('datauri', true);
+        Modernizr.datauri = new Boolean(true);
+        Modernizr.datauri.over32kb = (datauriBig.width == 1 && datauriBig.height == 1);
       };
 
       var base64str = 'R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';

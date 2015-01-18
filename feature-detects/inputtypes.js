@@ -23,7 +23,6 @@
 }
 !*/
 /* DOC
-
 Detects support for HTML5 form input types and exposes Boolean subproperties with the results:
 
 ```javascript
@@ -41,7 +40,6 @@ Modernizr.inputtypes.time
 Modernizr.inputtypes.url
 Modernizr.inputtypes.week
 ```
-
 */
 define(['Modernizr', 'inputElem', 'docElement', 'inputtypes', 'inputs', 'smile'], function( Modernizr, inputElem, docElement, inputtypes, inputs, smile ) {
   // Run through HTML5's new input types to see if the UA understands any.
@@ -90,7 +88,7 @@ define(['Modernizr', 'inputElem', 'docElement', 'inputtypes', 'inputs', 'smile']
           // Interestingly, opera fails the earlier test, so it doesn't
           //  even make it here.
 
-        } else if ( /^(url|email)$/.test(inputElemType) ) {
+        } else if ( /^(url|email|number)$/.test(inputElemType) ) {
           // Real url and email support comes with prebaked validation.
           bool = inputElem.checkValidity && inputElem.checkValidity() === false;
 

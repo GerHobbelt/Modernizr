@@ -7,11 +7,11 @@
   "notes": [{
     "name": "WHATWG spec",
     "href": "http://www.whatwg.org/specs/web-apps/current-work/multipage/the-input-element.html#input-type-attr-summary"
-  }]
+  }],
+  "knownBugs": ["Some blackberry devices report false positive for input.multiple"]
 }
 !*/
 /* DOC
-
 Detects support for HTML5 `<input>` element attributes and exposes Boolean subproperties with the results:
 
 ```javascript
@@ -26,7 +26,6 @@ Modernizr.input.placeholder
 Modernizr.input.required
 Modernizr.input.step
 ```
-
 */
 define(['Modernizr', 'createElement', 'attrs', 'inputattrs', 'inputElem'], function( Modernizr, createElement, attrs, inputattrs, inputElem ) {
   // Run through HTML5's new input attributes to see if the UA understands any.
