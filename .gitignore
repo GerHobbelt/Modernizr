@@ -1,8 +1,9 @@
 node_modules
 modernizr.min.js
+*.min.js
 metadata.json
 build
-dist
+#dist
 tmp
 .DS_Store
 .project
