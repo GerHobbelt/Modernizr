@@ -2708,6 +2708,29 @@ else {
 
 /*!
 {
+  "name": "CSS :invalid pseudo-class",
+  "property": "cssinvalid",
+  "notes": [{
+    "name": "MDN documentation",
+    "href": "https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid"
+  }]
+}
+!*/
+/* DOC
+  Detects support for the ':invalid' CSS pseudo-class.
+*/
+
+  Modernizr.addTest('cssinvalid', function() {
+    return testStyles('#modernizr input{height:0;border:0;padding:0;margin:0;width:10px} #modernizr input:invalid{width:50px}', function(elem) {
+      var input = createElement('input');
+      input.required = true;
+      elem.appendChild(input);
+      return input.clientWidth > 10;
+    });
+  });
+
+/*!
+{
   "name": "CSS :last-child pseudo-selector",
   "caniuse": "css-sel3",
   "property": "lastchild",
@@ -3473,6 +3496,28 @@ Detects support for `transform-style: preserve-3d`, for getting a proper 3D pers
 
   //https://github.com/Modernizr/Modernizr/issues/250
   Modernizr.addTest('userselect', testAllProps('userSelect', 'none', true));
+
+/*!
+{
+  "name": "CSS :valid pseudo-class",
+  "property": "cssvalid",
+  "notes": [{
+    "name": "MDN documentation",
+    "href": "https://developer.mozilla.org/en-US/docs/Web/CSS/:valid"
+  }]
+}
+!*/
+/* DOC
+  Detects support for the ':valid' CSS pseudo-class.
+*/
+
+  Modernizr.addTest('cssvalid', function() {
+    return testStyles('#modernizr input{height:0;border:0;padding:0;margin:0;width:10px} #modernizr input:valid{width:50px}', function(elem) {
+      var input = createElement('input');
+      elem.appendChild(input);
+      return input.clientWidth > 10;
+    });
+  });
 
 /*!
 {

@@ -31,7 +31,7 @@
     "grunt-contrib-nodeunit": ">=0.4.1"
   },
   "scripts": {
-    "test": "./node_modules/.bin/grunt test"
+    "test": "grunt test"
   },
   "main": "./lib/cli",
   "repository": {
